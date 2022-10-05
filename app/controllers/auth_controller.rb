@@ -4,7 +4,7 @@ class AuthController < ApplicationController
 
         if @user.valid?
             token = encode_token({user_id: @user.id});
-            render json: {user: @user, token: token}, status: :created;
+            render json: {user: UserSerializer.new(@user), token: token}, status: :created;
         else
             render json: {error: "User was not created"}, status: :unprocessable_entity
         end
@@ -15,7 +15,7 @@ class AuthController < ApplicationController
 
         if @user && @user.authenticate(user_login_params[:password])
             token = encode_token({user_id: @user.id});
-            render json: {user: @user, token: token}, status: :ok;
+            render json: {user: UserSerializer.new(@user), token: token}, status: :ok;
         else
             render json: {error: "Invalid username or password"}, status: :unprocessable_entity
         end
