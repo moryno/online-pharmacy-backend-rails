@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :profiles
+  resources :profiles, only: [:create]
   resources :order_items
   resources :orders
   resources :products
