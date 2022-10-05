@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
         if @user.valid?
             token = encode_token({user_id: @user.id});
-            render json: {user: @user, jwt: token}, status: :created;
+            render json: {user: @user, token: token}, status: :created;
         else
             render json: {error: "User was not created"}, status: :unprocessable_entity
         end
@@ -14,6 +14,6 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.permit(:username, :password)
+        params.require(:user).permit(:first_name, :last_name, :username, :email, :password)
     end
 end
