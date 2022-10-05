@@ -30,3 +30,7 @@ group :development do
   # gem "spring"
 end
 
+
+gem "jwt", "~> 2.5"
+
+gem "active_model_serializers", "~> 0.10.13"
