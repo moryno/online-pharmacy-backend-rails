@@ -23,4 +23,8 @@ class ApplicationController < ActionController::API
             @user = User.find_by(id: user_id)
         end
     end
+
+    def authorized
+        render json: {message: "You have to log in."}, status: :unauthorized unless authorize_user
+    end
 end
