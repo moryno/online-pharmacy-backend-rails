@@ -1,4 +1,6 @@
 class AuthController < ApplicationController
+    skip_before_action :authorized, only: [:register, :login]
+    
     def register
         @user = User.create(user_register_params);
 
