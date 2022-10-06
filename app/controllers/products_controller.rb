@@ -36,6 +36,21 @@ class ProductsController < ApplicationController
         end
     end
 
+    def update
+        if @user.profile.is_admin
+            product = find_product
+           
+            if product
+                product.update(product_params)
+                render json: product, status: :accepted
+            else
+                render_product_not_found_response
+            end
+        else
+            render json: {error: "Only admin is authorized to do that!"}
+        end
+    end
+
     private
 
     def product_params
