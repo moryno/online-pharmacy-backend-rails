@@ -23,6 +23,16 @@ class UsersController < ApplicationController
     end
    end
 
+   def destroy
+    current_user = find_user
+    if current_user
+       current_user.destroy
+       head :no_content
+    else
+        render_user_not_found_response
+    end
+   end
+
    private
    
    def find_user
