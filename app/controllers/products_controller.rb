@@ -51,6 +51,21 @@ class ProductsController < ApplicationController
         end
     end
 
+    def destroy
+        if @user.profile.is_admin
+            product = find_product
+           
+            if product
+                product.destroy
+                render json: {}
+            else
+                render_product_not_found_response
+            end
+        else
+            render json: {error: "Only admin is authorized to do that!"}
+        end
+    end
+
     private
 
     def product_params
