@@ -5,8 +5,8 @@ class AuthController < ApplicationController
         @user = User.create(user_register_params);
 
         if @user.valid?
-            token = encode_token({user_id: @user.id}, Time.now.to_i + 3600);
-            render json: {user: UserSerializer.new(@user), token: token}, status: :created;
+           
+            render json: {user: UserSerializer.new(@user)}, status: :created;
         else
             render json: {error: "User was not created"}, status: :unprocessable_entity
         end
