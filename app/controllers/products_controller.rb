@@ -16,8 +16,17 @@ class ProductsController < ApplicationController
     end
 
     def index
-        query = params[:new]
-        products = query ? Product.all.order(created_at: :desc).limit(5) : Product.all
+        query_new = params[:new]
+        query_category = params[:category]
+        
+        products = if query_new
+            Product.all.order(created_at: :desc).limit(5)
+        elsif query_category
+            Product.where(categories: query_category)
+        else
+            Product.all
+        end
+        
 
         if products
             render json: products, status: :ok
