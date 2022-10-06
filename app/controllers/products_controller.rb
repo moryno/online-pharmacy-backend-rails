@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
             if product.valid?
                 render json: product, status: :created
             else
-                render json: {error: "Failed to create product"}
+                render json: {error: "Failed to create product"}, status: :unprocessable_entity
             end
         else
             render json: {error: "Only admin is authorized to do that!"}
