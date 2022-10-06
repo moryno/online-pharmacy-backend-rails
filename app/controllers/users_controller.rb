@@ -1,5 +1,20 @@
 class UsersController < ApplicationController
 
+   def index
+    if @user.profile.is_admin
+        query = params[:new]
+        current_users = query ? User.all.order(created_at: :desc).limit(5) : User.all
+        
+        if current_users
+            render json: current_users, status: :ok
+        else
+            render_user_not_found_response
+        end
+    else
+        render json: {error: "Only admin is authorized to do that!"}
+    end
+   end
+
    def show
     if @user.profile.is_admin
         current_user = find_user
