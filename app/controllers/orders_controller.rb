@@ -14,7 +14,6 @@ class OrdersController < ApplicationController
     def index
         if @user.profile.is_admin
             orders = Order.all
-           
             if orders
                 render json: orders, status: :ok
             else
@@ -27,7 +26,6 @@ class OrdersController < ApplicationController
 
     def show
         order = Order.where({user_id: @user.id})
-
         if order
             render json: order, status: :ok
         else

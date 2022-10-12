@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-    skip_before_action :authorized, only: [:index, :show]
+      skip_before_action :authorized, only: [:index, :show]
 
     def create
         if @user.profile.is_admin

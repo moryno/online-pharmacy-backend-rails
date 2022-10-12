@@ -16,7 +16,7 @@ class AuthController < ApplicationController
         @user = User.find_by(username: user_login_params[:username])
 
         if @user && @user.authenticate(user_login_params[:password])
-            token = encode_token({user_id: @user.id}, Time.now.to_i + 3600);
+            token = encode_token({user_id: @user.id}, Time.now.to_i + 432000);
             render json: {user: UserSerializer.new(@user), token: token}, status: :ok;
         else
             render json: {error: "Invalid username or password"}, status: :unprocessable_entity
