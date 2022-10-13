@@ -10,9 +10,14 @@ class ProfilesController < ApplicationController
         end
     end
 
+    def index
+        profiles = Profile.all
+        render json: profiles, status: :ok 
+    end
+
     private
     def profile_params
-        params.permit(:is_admin, :image, :phone, :address )
+        params.permit(:image, :phone, :address )
     end
 
 end
