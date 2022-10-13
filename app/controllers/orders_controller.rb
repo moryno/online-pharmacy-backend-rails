@@ -70,7 +70,7 @@ class OrdersController < ApplicationController
     private
 
     def order_params
-        params.permit(:subtotal, :total)
+        params.permit(:amount, :address, :product_id)
     end
 
     def find_order
