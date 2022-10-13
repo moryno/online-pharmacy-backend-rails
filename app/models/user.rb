@@ -1,8 +1,8 @@
 class User < ApplicationRecord
     has_secure_password
     has_one :profile, dependent: :destroy
-    has_many :order_items, dependent: :destroy
-    has_many :products, through: :order_items
+    has_many :carts, dependent: :destroy
+    has_many :products, through: :carts
     has_many :reviews, dependent: :destroy
     
     validates :first_name, presence: true

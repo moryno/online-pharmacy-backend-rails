@@ -1,8 +1,8 @@
-class OrderItemsController < ApplicationController
+class CartsController < ApplicationController
     skip_before_action :authorized, only: [:create]
 
     def create
-        cart = OrderItem.create(cart_params.merge({user: @user}))
+        cart = Cart.create(cart_params.merge({user: @user}))
            
         if cart.valid?
                 render json: cart, status: :created
@@ -13,7 +13,7 @@ class OrderItemsController < ApplicationController
 
     def index
         if @user.profile.is_admin
-            carts = OrderItem.all
+            carts = Cart.all
            
             if carts
                 render json: carts, status: :ok
@@ -26,7 +26,7 @@ class OrderItemsController < ApplicationController
     end
 
     def show
-        cart = OrderItem.where({user_id: @user.id})
+        cart = Cart.where({user_id: @user.id})
 
         if cart
             render json: cart, status: :ok
@@ -68,7 +68,7 @@ class OrderItemsController < ApplicationController
     end
 
     def find_cart
-        OrderItem.find_by(id: params[:id])
+        Cart.find_by(id: params[:id])
     end
 
     def render_cart_not_found_response
