@@ -39,7 +39,7 @@ class ProductsController < ApplicationController
         product = find_product
 
         if product
-            render json: product, status: :ok
+            render json: product, serializer: ProductShowReviewsSerializer, status: :ok
         else
             render_product_not_found_response
         end
