@@ -8,7 +8,7 @@ class ApplicationController < ActionController::API
 
     def decode_token
         auth_header = request.headers["Authorization"];
-  \
+  
         if auth_header
             token = auth_header.split(" ")[1]
             begin
